@@ -1,0 +1,16 @@
+/.bundle/
+/.idea/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/vendor/
+
+# Gems don't keep this (let client decide)
+Gemfile.lock
+
+# rspec failure tracking
+.rspec_status
