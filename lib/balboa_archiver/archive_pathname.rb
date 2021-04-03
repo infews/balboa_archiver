@@ -21,7 +21,7 @@ module BalboaArchiver
         name = if file_this_match.nil?
           basename
         else
-          name_from(file_this_match)
+          name_from_file_this(file_this_match)
         end
 
         new(File.join(year, month_dirname, name))
@@ -44,15 +44,13 @@ module BalboaArchiver
         [year, month_dirname]
       end
 
-      def name_from(file_this_match)
-        year, month, date = file_this_match.values_at(:year, :month, :date)
-        doc = file_this_match[:doc]
-        other = file_this_match[:other]
+      def name_from_file_this(match)
+        name = match.values_at(:year, :month, :date)
+        name << match[:doc].strip.tr(" ", ".").to_s
+        name << match[:other].strip unless match[:other].empty?
+        name << "pdf"
 
-        rest_of_name = doc.strip.tr(" ", ".").to_s
-        rest_of_name += ".#{other.strip}" unless other.empty?
-
-        [year, month, date, rest_of_name, "pdf"].join(".")
+        name.join(".")
       end
     end
   end

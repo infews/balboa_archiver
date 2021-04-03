@@ -25,17 +25,34 @@ module BalboaArchiver
     end
 
     context "for a FileThis file name" do
-      let(:path) { "Allstate Automobile 904150241 Statements 2018-07-12.pdf" }
-      it "returns a new ArchivePathname" do
-        expect(archive_pathname).to be_a(ArchivePathname)
+      context "with the date at the end" do
+        let(:path) { "Allstate Automobile 904150241 Statements 2018-07-12.pdf" }
+        it "returns a new ArchivePathname" do
+          expect(archive_pathname).to be_a(ArchivePathname)
+        end
+
+        it "returns a new name" do
+          expect(archive_pathname.basename.to_s).to eq("2018.07.12.Allstate.Automobile.904150241.Statements.pdf")
+        end
+
+        it "has a directory" do
+          expect(archive_pathname.dirname.to_s).to eq("2018/07.Jul")
+        end
       end
 
-      it "returns a new name" do
-        expect(archive_pathname.basename.to_s).to eq("2018.07.12.Allstate.Automobile.904150241.Statements.pdf")
-      end
+      context "with more after the date" do
+        let(:path) { "Allstate Automobile 904150241 Statements 2018-07-12 (1).pdf" }
+        it "returns a new ArchivePathname" do
+          expect(archive_pathname).to be_a(ArchivePathname)
+        end
 
-      it "has a directory" do
-        expect(archive_pathname.dirname.to_s).to eq("2018/07.Jul")
+        it "returns a new name" do
+          expect(archive_pathname.basename.to_s).to eq("2018.07.12.Allstate.Automobile.904150241.Statements.(1).pdf")
+        end
+
+        it "has a directory" do
+          expect(archive_pathname.dirname.to_s).to eq("2018/07.Jul")
+        end
       end
     end
 
@@ -55,7 +72,7 @@ module BalboaArchiver
       end
     end
 
-    context "for a filename that has a leading year" do
+    context "for a filename that only has a leading year" do
       let(:path) { "2021.foo.bar.baz" }
 
       it "returns a new ArchivePathname" do
