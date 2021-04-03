@@ -22,18 +22,18 @@ module BalboaArchiver
     end
   end
 
-  MONTH_DIRNAMES = [
-    "01.Jan",
-    "02.Feb",
-    "03.Mar",
-    "04.Apr",
-    "05.May",
-    "06.Jun",
-    "07.Jul",
-    "08.Aug",
-    "09.Sep",
-    "10.Oct",
-    "11.Nov",
-    "12.Dec"
-  ]
+  MONTH_DIRNAMES = {
+    "01" => "01.Jan",
+    "02" => "02.Feb",
+    "03" => "03.Mar",
+    "04" => "04.Apr",
+    "05" => "05.May",
+    "06" => "06.Jun",
+    "07" => "07.Jul",
+    "08" => "08.Aug",
+    "09" => "09.Sep",
+    "10" => "10.Oct",
+    "11" => "11.Nov",
+    "12" => "12.Dec"
+  }
 end

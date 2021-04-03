@@ -17,34 +17,24 @@ module BalboaArchiver
 
         return nil if match.nil?
 
-        year, month_dirname = directories_from(match)
-        name = if file_this_match.nil?
-          basename
-        else
-          name_from_file_this(file_this_match)
-        end
+        year = match[:year]
+        month_dirname = month_from(match)
+        name = name_from(basename, file_this_match)
 
         new(File.join(year, month_dirname, name))
       end
 
       private
 
-      def directories_from(match)
-        captures = match.named_captures
+      def month_from(match)
+        return "" unless match.names.include?("month")
 
-        year = captures.fetch("year")
-        m = captures.fetch("month", "")
-
-        month_dirname = if m == ""
-          ""
-        else
-          MONTH_DIRNAMES[m.to_i - 1]
-        end
-
-        [year, month_dirname]
+        MONTH_DIRNAMES.fetch(match[:month])
       end
 
-      def name_from_file_this(match)
+      def name_from(basename, match)
+        return basename if match.nil?
+
         name = match.values_at(:year, :month, :date)
         name << match[:doc].strip.tr(" ", ".").to_s
         name << match[:other].strip unless match[:other].empty?
