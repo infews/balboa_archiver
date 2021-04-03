@@ -1,10 +1,9 @@
-require "thor"
-
 module BalboaArchiver
   class CLI < Thor
     include Thor::Actions
 
     desc "copy SRC DST", "copies all dated files in SRC to DST, renaming to common format"
+
     def copy(src, dst)
       raise NoSourceDirectoryError.new(src) unless File.exist?(src)
       raise NoDestinationDirectoryError.new(dst) unless File.exist?(dst)
@@ -16,11 +15,11 @@ module BalboaArchiver
         Pathname(destination_path + destination_file.basename)
       end
 
-      say "Found #{maps.length} files to copy to #{destination_path}", CYAN
+      say "Found #{maps.length} files to copy to #{destination_path}", :cyan
 
       maps.each do |map|
-        puts "copying #{map.dst.basename}"
-        system "cp -u #{map.src.expand_path} #{map.dst.expand_path}"
+        say "copying #{map.dst.basename}"
+        FileUtils.cp map.src.expand_path, map.dst.expand_path
       end
     end
   end

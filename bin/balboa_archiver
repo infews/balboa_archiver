@@ -3,8 +3,7 @@ require "rubygems"
 
 libdir = File.join( __dir__, "..", "lib")
 $LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
-require "balboa_archiver"
 
-Rainbow.enabled = true
+require "balboa_archiver"
 
 BalboaArchiver::CLI.start

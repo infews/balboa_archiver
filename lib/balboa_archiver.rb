@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require "pathname"
+
 require_relative "balboa_archiver/archive_pathname"
 require_relative "balboa_archiver/rename_map"
 require_relative "balboa_archiver/version"
-# require_relative "balboa_archiver/cli"
+require_relative "cli"
 
 module BalboaArchiver
   class Error < StandardError; end

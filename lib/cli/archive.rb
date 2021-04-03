@@ -1,4 +1,4 @@
-require "thor"
+require 'FileUtils'
 
 module BalboaArchiver
   class CLI < Thor
@@ -12,17 +12,17 @@ module BalboaArchiver
       source_directory = Pathname(src)
       destination_directory = Pathname(dst)
 
-      maps = RenameMap.from(source_directory.glob("*")) do |destination_file|
+      maps = RenameMap.from(source_directory.glob("**/*")) do |destination_file|
         Pathname(destination_directory + destination_file)
       end
 
-      say "Found #{maps.length} files to copy to #{destination_directory}", CYAN
+      say "Found #{maps.length} files to copy to #{destination_directory}", :cyan
 
       maps.each do |map|
         make_archive_subdir(map.dst.split.first)
 
         say "copying #{map.dst.basename}"
-        system "cp -u #{map.src.expand_path} #{map.dst.expand_path}"
+        FileUtils.cp map.src.expand_path, map.dst.expand_path
       end
     end
 
@@ -30,7 +30,7 @@ module BalboaArchiver
       def make_archive_subdir(directory)
         return if directory.exist?
 
-        say "Making archive year and month folder #{directory}", GREEN
+        say "Making archive year and month folder #{directory}", :green
         Dir.mkdir(directory)
       end
     end
