@@ -30,14 +30,12 @@ Gem::Specification.new do |spec|
   spec.executables = "archive"
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rainbow"
   spec.add_dependency "thor"
 
   spec.add_development_dependency "bundler", ">= 2.0"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "standard"
-  spec.add_development_dependency "timecop"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-byebug"
 
