@@ -1,5 +1,7 @@
 module BalboaArchiver
   class FileThisPathBuilder < PathBuilder
+    PATTERN = /^(?<doc>.*)(?<year>\d{4})-(?<month>\d{2})-(?<date>\d{2})(?<other>.*)\.pdf/
+
     def initialize(basename, match)
       @year = match[:year]
       @month_dir = MONTH_DIRNAMES.fetch(match[:month])
