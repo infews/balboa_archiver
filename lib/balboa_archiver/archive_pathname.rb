@@ -6,41 +6,26 @@ module BalboaArchiver
 
     class << self
       def for(path)
-        return nil if path.nil?
-
-        basename = File.basename(path)
-        file_this_match = basename.match(FILETHIS_NAME)
-        full_match = basename.match(VALID_FULL_NAME)
-        year_match = basename.match(VALID_LEADING_YEAR)
-
-        match = file_this_match || full_match || year_match
-
-        return nil if match.nil?
-
-        year = match[:year]
-        month_dirname = month_from(match)
-        name = name_from(basename, file_this_match)
-
-        new(File.join(year, month_dirname, name))
+        basename = File.basename(path || "empty")
+        path_builder = path_builder_for(basename)
+        new(path_builder.path)
       end
 
       private
 
-      def month_from(match)
-        return "" unless match.names.include?("month")
+      def path_builder_for(basename)
+        klass = if (match = basename.match(FILETHIS_NAME))
+          FileThisPathBuilder
+        elsif (match = basename.match(VALID_FULL_NAME))
+          FullNamePathBuilder
+        elsif (match = basename.match(VALID_LEADING_YEAR))
+          LeadingYearPathBuilder
+        else
+          match = nil
+          EmptyPathBuilder
+        end
 
-        MONTH_DIRNAMES.fetch(match[:month])
-      end
-
-      def name_from(basename, match)
-        return basename if match.nil?
-
-        name = match.values_at(:year, :month, :date)
-        name << match[:doc].strip.tr(" ", ".").to_s
-        name << match[:other].strip unless match[:other].empty?
-        name << "pdf"
-
-        name.join(".")
+        klass.new(basename, match)
       end
     end
   end

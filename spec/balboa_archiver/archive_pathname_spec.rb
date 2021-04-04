@@ -4,15 +4,15 @@ module BalboaArchiver
 
     context "for a filename that is nil" do
       let(:path) { nil }
-      it "returns nil" do
-        expect(archive_pathname).to be_nil
+      it "returns an empty path" do
+        expect(archive_pathname.to_s).to eq("")
       end
     end
 
     context "for a filename that has no discernible date" do
       let(:path) { "foo-bar-baz.txt" }
-      it "returns nil" do
-        expect(archive_pathname).to be_nil
+      it "returns an empty path" do
+        expect(archive_pathname.to_s).to eq("")
       end
     end
 

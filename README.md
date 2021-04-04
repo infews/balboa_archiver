@@ -1,8 +1,34 @@
 # BalboaArchiver
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/balboa_archiver`. To experiment with that code, run `bin/console` for an interactive prompt.
+The Balboa Archiving System solves the problem of storing and retrieving digital document files that are important to you. This include bank statements, bills, job applications, and the like.
 
-TODO: Delete this and the text above, and describe your gem
+The System has a file naming convention and a directory storage convention that makes the files quick and easy to store. The ease then makes it easy to find a given file using either human browsing heuristics or file system search utilitiy.
+
+## File Names
+
+All files have the following naming format:
+
+`<four-digit-year>.<two-digit-month>.<two-digit-date>.<the rest of the name>.<extention>`
+
+Valid Names:
+
+- 1991.05.17.StateU.MyCollegeEssay.pdf
+- 2020.10.05.Savings.BankStatement.pdf
+- 2003.VISA.EndOfYear.pdf
+
+Since some file
+
+
+The system recommends a "big-to-little" hierachy
+
+
+## Storage Directory Tree
+
+as well as easy to browse and search
+
+them consistently, and then storing them in a consistent directory structure. This solves the problem of how you 
+
+
 
 ## Installation
 

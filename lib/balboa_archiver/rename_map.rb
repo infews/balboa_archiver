@@ -7,7 +7,7 @@ module BalboaArchiver
         maps = sources.each_with_object([]) do |src, to_copy|
           src_path = Pathname(src)
           renamed_pathname = ArchivePathname.for(src_path.basename)
-          next unless renamed_pathname
+          next if renamed_pathname.to_s.empty?
 
           dst_path = yield renamed_pathname
 

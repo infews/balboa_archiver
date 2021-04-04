@@ -1,4 +1,4 @@
-require 'FileUtils'
+require "FileUtils"
 
 module BalboaArchiver
   class CLI < Thor

@@ -2,6 +2,11 @@
 
 require "pathname"
 
+require_relative "balboa_archiver/path_builder"
+require_relative "balboa_archiver/empty_path_builder"
+require_relative "balboa_archiver/file_this_path_builder"
+require_relative "balboa_archiver/full_name_path_builder"
+require_relative "balboa_archiver/leading_year_path_builder"
 require_relative "balboa_archiver/archive_pathname"
 require_relative "balboa_archiver/rename_map"
 require_relative "balboa_archiver/version"
